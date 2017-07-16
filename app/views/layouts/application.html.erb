@@ -11,6 +11,26 @@
  <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
+
+     <header>
+
+<div class="logo">
+<%= image_tag 'quora.png' %>
+</div>
+
+
+<nav>
+
+<ul>
+<li>  <%= link_to "Sign Out",destroy_user_session_path,method: :delete %></li>
+</ul>
+</nav>
+
+
+</header>
+
+
+
 <%= yield %>
 
 </body>
