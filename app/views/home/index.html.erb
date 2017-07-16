@@ -4,26 +4,19 @@
 	
 </div>
 <div class="middle_main">
-	<%= form_for @question do |f| %>
-
-<%= f.label :content %> <br>
-
-<%= f.text_area :content %>  <br>
-<div class="field">
-        <%= f.label "Ask anonymous" %> <br />
-        <%= f.check_box :anonymous, {}, true, false %> <br />
+   <div class="createquestion">
+	 <%= form_for @question do |f| %>
+     <%= f.label :content %> <br>
+     <%= f.text_area :content %>  <br>
+       <%= f.check_box :anonymous, {}, true, false %> 
+       <%= f.label "Ask anonymous" %> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <%= f.submit  %>
+    <% end %>
     </div>
-<div class="actions">
-<%= f.submit  id: 'ask question' %>
-</div>
-
-<% end %>
-
-
 
 <% @questions.each do |question| %>
-
-         <br>
+    <div class="question">
+       
 
 	    <% if question.anonymous %>
 		Anonymous asked 
@@ -34,7 +27,7 @@
 
 	    <%= question.content %>
 
-	    <%= link_to question.upvote_question(current_user.id), url_for(controller: 'upvotequestions', action: 'upvote', question_id: question.id), method: :post %>  <%= question.upvotequestions.count %>
+	    <%= link_to question.upvote_question(current_user.id), url_for(controller: 'upvotequestions', action: 'upvote', question_id: question.id), method: :post %>  
 
       <%= form_for @answer do |f| %> 
 
@@ -54,6 +47,7 @@
          <%= link_to answer.upvote_answer(current_user.id), url_for(controller: 'upvoteanswers', action: 'toggle', answer_id: answer.id), method: :post %>  <%= answer.upvoteanswers.count %>
          <br>
         	<% end %>
+        	</div>
 <% end %>
 
 
