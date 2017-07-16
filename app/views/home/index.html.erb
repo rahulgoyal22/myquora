@@ -1,0 +1,63 @@
+
+<%= form_for @question do |f| %>
+
+<%= f.label :content %> <br>
+
+<%= f.text_area :content %>  <br>
+<div class="field">
+        <%= f.label "Ask anonymous" %> <br >
+        <%= f.check_box :anonymous, {}, true, false %> <br >
+    </div>
+
+<%= f.submit  id: 'ask question' %>
+
+
+<% end %>
+
+<% @questions.each do |question| %>
+<br>
+	    <% if question.anonymous %>
+		Anonymous asked <%= question.content %>
+
+
+      <%= form_for @answer do |f| %> 
+
+       <%= f.text_area :content %>  <br> 
+
+<input type="hidden" name="question_id" value="<%= question.id %>">
+
+           <%= f.submit  id: 'comment' %>
+        <% end %> 
+
+        <% question.answers.each do |answer| %>
+        <% user_id=answer.User_id %>
+       <% user=User.where(id: user_id).first %>
+
+        <%=user.email %> answered <%= answer.content %>
+        	<% end %>
+
+
+		<% else %>
+	    <%= question.user.email %>	asked <%= question.content %>
+		   <%= form_for @answer do |f| %> 
+
+       <%= f.text_area :content %>  <br> 
+
+<input type="hidden" name="question_id" value="<%= question.id %>">
+
+           <%= f.submit  id: 'comment' %>
+        <% end %> 
+
+        <% question.answers.each do |answer| %>
+  <% user_id=answer.User_id %>
+       <% user=User.where(id: user_id).first %>
+
+        <%=user.email %> answered <%= answer.content %>
+        	<% end %>
+
+
+	
+	<br>
+	 <% end %>
+	<br>
+<% end %>
