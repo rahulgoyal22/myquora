@@ -16,7 +16,11 @@
 
 <% @questions.each do |question| %>
     <div class="question">
-       
+ <div>      
+<% if question.user.profile_picture %>
+	<img src="/uploads/<%=question.user.profile_picture %>">
+<% end %>
+</div>
 
 	    <% if question.anonymous %>
 		Anonymous asked 

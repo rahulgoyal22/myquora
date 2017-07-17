@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   resources :answers, only: [:create,:destroy]
   get 'home/index'
   root 'home#index'
-
+  get '/profile' => 'home#profile'
   resources :questions, only: [:create,:destroy]
    post '/upvote' => 'upvotequestions#upvote'
    post '/toggle' => 'upvoteanswers#toggle'
+     post '/upload_image' => 'home#upload_image'
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
