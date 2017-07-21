@@ -1,0 +1,2 @@
+noty({text: 'Question was Created', type: 'alert'});
+$('#question').prepend("<%= escape_javascript (render 'home/question', question: @question) %>");

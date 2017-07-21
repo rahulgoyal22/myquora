@@ -4,11 +4,14 @@ class UpvotequestionsController < ApplicationController
 		upvote = Upvotequestion.where(user: current_user, question: @question).first
 		if upvote
 			upvote.destroy!
-			# @is_ = false	
+			@is_upvoted = false	
 		else
 			Upvotequestion.create(user: current_user, question: @question)
-			# @is_upvoted = true
+			@is_upvoted = true
 		end
-        return redirect_to '/'
+        # return redirect_to '/'
+        respond_to do |format|
+			format.js {}
+		end
   end
 end

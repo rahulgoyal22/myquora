@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         format.html { redirect_to '/', notice: 'Question was successfully created.' }
+          format.js {    }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render 'home/index'}

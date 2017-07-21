@@ -1,0 +1,10 @@
+<% if @is_upvoted %>
+$('#upvote_<%= @question.id%>').html("Downvote");
+noty({text: 'Question was upvoted', type: 'alert'});
+
+<% else %>
+
+$('#upvote_<%= @question.id%>').html("Upvote");
+noty({text: 'Question was downvote', type: 'alert'});
+
+<% end %> 

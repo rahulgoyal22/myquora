@@ -5,7 +5,7 @@
 </div>
 <div class="middle_main">
    <div class="createquestion">
-	 <%= form_for @question do |f| %>
+	 <%= form_for @question, :remote => true do |f| %>
      <%= f.label :content %> <br>
      <%= f.text_area :content %>  <br>
        <%= f.check_box :anonymous, {}, true, false %> 
@@ -15,44 +15,8 @@
     </div>
 
 <% @questions.each do |question| %>
-    <div class="question">
- <div>      
-<% if question.user.profile_picture %>
-	<img src="/uploads/<%=question.user.profile_picture %>">
-<% end %>
-</div>
-
-	    <% if question.anonymous %>
-		Anonymous asked 
-		<% else %>
-	    <%= question.user.email %>	asked
-	    <% end %> 
-
-
-	    <%= question.content %>
-
-	    <%= link_to question.upvote_question(current_user.id), url_for(controller: 'upvotequestions', action: 'upvote', question_id: question.id), method: :post %>  
-
-      <%= form_for @answer do |f| %> 
-
-       <%= f.text_area :content %>  <br> 
-
-<input type="hidden" name="question_id" value="<%= question.id %>">
-
-           <%= f.submit  id: 'comment' %>
-        <% end %> 
-
-        <% question.answers.each do |answer| %>
-        <% user_id=answer.User_id %>
-       <% user=User.where(id: user_id).first %>
-
-        <%=user.email %> answered <%= answer.content %>
-
-         <%= link_to answer.upvote_answer(current_user.id), url_for(controller: 'upvoteanswers', action: 'toggle', answer_id: answer.id), method: :post %>  <%= answer.upvoteanswers.count %>
-         <br>
-        	<% end %>
-        	</div>
-<% end %>
+    <%= render 'question', question: question %>
+  <% end %>
 
 
 
